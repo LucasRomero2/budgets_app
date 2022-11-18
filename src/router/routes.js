@@ -18,6 +18,11 @@ const routes = [
         name: "register",
         component: () => import("pages/RegisterPage.vue"),
       },
+      {
+        path: "/contrasena-olvidada",
+        name: "forgot-password",
+        component: () => import("pages/ForgotPassword.vue"),
+      },
     ],
   },
   {

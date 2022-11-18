@@ -4,12 +4,11 @@
       class="row q-mt-xl items-center justify-center full-height full-width"
       @submit.prevent="onSubmit"
     >
-      <p class="col-12 text-h5 text-center">Iniciar sesión</p>
-      <div class="col-md-4 col-sm-6 col-xs-10 q-mt-sm">
-        <q-input v-model="formData.email" type="email" label="Email" />
+      <p class="col-12 text-h5 text-center">Nueva contraseña</p>
 
+      <div class="col-md-4 col-sm-6 col-xs-10 q-mt-sm">
         <q-input
-          v-model="formData.password"
+          v-model="newPassword"
           :type="isPwd ? 'password' : 'text'"
           label="Contraseña"
         >
@@ -30,15 +29,6 @@
           label="Ingresar"
           type="submit"
         />
-
-        <div class="row justify-between q-mt-md">
-          <router-link :to="{ name: 'register' }" class="sub-links">
-            Crear Cuenta
-          </router-link>
-          <router-link :to="{ name: 'forgot-password' }" class="sub-links">
-            Olvidé mi contraseña
-          </router-link>
-        </div>
       </div>
     </q-form>
   </q-page>
@@ -53,10 +43,7 @@ const router = useRouter();
 const { login } = useAuthUser();
 
 const isPwd = ref(true);
-const formData = ref({
-  email: "",
-  password: "",
-});
+const newPassword = ref("");
 
 const onSubmit = async () => {
   try {
@@ -67,13 +54,3 @@ const onSubmit = async () => {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.sub-links {
-  cursor: pointer;
-  color: $primary;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-</style>
