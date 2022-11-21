@@ -6,12 +6,20 @@
     >
       <p class="col-12 text-h5 text-center">Iniciar sesión</p>
       <div class="col-md-4 col-sm-6 col-xs-10 q-mt-sm">
-        <q-input v-model="formData.email" type="email" label="Email" />
+        <q-input
+          v-model="formData.email"
+          type="email"
+          label="Email"
+          lazy-rules
+          :rules="formRules.email"
+        />
 
         <q-input
           v-model="formData.password"
           :type="isPwd ? 'password' : 'text'"
           label="Contraseña"
+          lazy-rules
+          :rules="formRules.password"
         >
           <template v-slot:append>
             <q-icon
@@ -46,10 +54,12 @@
 
 <script setup>
 import useAuthUser from "src/composables/UseAuthUser";
+import useNotify from "src/composables/UseNotify";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const { notifySuccess, notifyError } = useNotify();
 const { login } = useAuthUser();
 
 const isPwd = ref(true);
@@ -58,12 +68,18 @@ const formData = ref({
   password: "",
 });
 
+const formRules = {
+  email: [(val) => (val && val.length > 0) || "Email es requerido"],
+  password: [(val) => (val && val.length > 0) || "Contraseña es requerida"],
+};
+
 const onSubmit = async () => {
   try {
     await login(formData.value);
     router.push({ name: "home" });
+    notifySuccess("Logueado");
   } catch (error) {
-    alert(error);
+    notifyError(error.message);
   }
 };
 </script>

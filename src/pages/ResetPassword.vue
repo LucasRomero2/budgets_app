@@ -11,6 +11,8 @@
           v-model="newPassword"
           :type="isPwd ? 'password' : 'text'"
           label="Contraseña"
+          lazy-rules
+          :rules="passwordRules"
         >
           <template v-slot:append>
             <q-icon
@@ -44,6 +46,10 @@ const { login } = useAuthUser();
 
 const isPwd = ref(true);
 const newPassword = ref("");
+const passwordRules = [
+  (val) => (val && val.length > 0) || "Contraseña es requerida",
+  (val) => val.length > 6 || "Debe tener más de 6 caracteres",
+];
 
 const onSubmit = async () => {
   try {
