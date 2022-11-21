@@ -55,23 +55,28 @@
 <script setup>
 import useAuthUser from "src/composables/UseAuthUser";
 import useNotify from "src/composables/UseNotify";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const { notifySuccess, notifyError } = useNotify();
-const { login } = useAuthUser();
+const { login, isLoggedIn } = useAuthUser();
 
 const isPwd = ref(true);
 const formData = ref({
   email: "",
   password: "",
 });
-
 const formRules = {
   email: [(val) => (val && val.length > 0) || "Email es requerido"],
   password: [(val) => (val && val.length > 0) || "Contraseña es requerida"],
 };
+
+onMounted(() => {
+  if (isLoggedIn) {
+    router.push({ name: "home" });
+  }
+});
 
 const onSubmit = async () => {
   try {
