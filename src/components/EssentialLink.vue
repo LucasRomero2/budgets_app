@@ -7,6 +7,18 @@
     <q-item-section>
       <q-item-label>{{ title }}</q-item-label>
     </q-item-section>
+
+    <q-item-section v-if="haveAddIcon" avatar>
+      <q-btn
+        @click.stop="handleAddAction"
+        class="gt-xs"
+        size="12px"
+        flat
+        dense
+        round
+        icon="add"
+      />
+    </q-item-section>
   </q-item>
 </template>
 
@@ -34,6 +46,15 @@ export default defineComponent({
     icon: {
       type: String,
       default: "",
+    },
+
+    haveAddIcon: {
+      type: Boolean,
+    },
+
+    handleAddAction: {
+      type: Function,
+      default: () => {},
     },
   },
 });

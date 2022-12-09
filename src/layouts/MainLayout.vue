@@ -22,7 +22,7 @@
       @mouseover="miniState = false"
       @mouseout="miniState = true"
       mini-to-overlay
-      :width="200"
+      :width="250"
       :breakpoint="500"
       bordered
       class="bg-grey-3"
@@ -48,6 +48,11 @@
       </q-scroll-area>
     </q-drawer>
 
+    <!-- Dialogs Forms -->
+    <q-dialog v-model="showIncomeCreate">
+      <income-create />
+    </q-dialog>
+
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -56,50 +61,68 @@
 
 <script setup>
 import EssentialLink from "components/EssentialLink.vue";
+import IncomeCreate from "components/incomes/IncomeCreate.vue";
 import useAuthUser from "src/composables/UseAuthUser";
 import { ref } from "vue";
 import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
+import { useCategoryStore } from "stores/category-store";
+import { useAccountStore } from "src/stores/account-store";
+
+/* pass to function? */
+const categoryStore = useCategoryStore();
+const accountStore = useAccountStore();
+/* Set loading for now show components */
+categoryStore.setCategories();
+accountStore.setAccounts();
 
 const { logout } = useAuthUser();
 const router = useRouter();
 const $q = useQuasar();
+const showIncomeCreate = ref(true);
 const essentialLinks = [
-  {
-    title: "Presupuestos",
-    icon: "donut_large",
-    link: "#",
-    handleAction: () => {},
-  },
   {
     title: "Ingresos",
     icon: "trending_up",
     link: "#",
-    handleAction: () => {},
+    haveAddIcon: true,
+    handleAddAction: () => {
+      showIncomeCreate.value = true;
+    },
   },
   {
     title: "Gastos",
     icon: "trending_down",
     link: "#",
-    handleAction: () => {},
+    haveAddIcon: true,
+    handleAddAction: () => {},
+  },
+  {
+    title: "Transferencias",
+    icon: "swap_horiz",
+    link: "#",
+    haveAddIcon: true,
+    handleAddAction: () => {},
+  },
+  {
+    title: "Presupuestos",
+    icon: "donut_large",
+    link: "#",
   },
   {
     title: "Categorias",
     icon: "bookmarks",
     link: "#",
-    handleAction: () => {},
   },
   {
     title: "Cajas",
     icon: "wallet",
     link: "#",
-    handleAction: () => {},
   },
   {
     title: "Reportes",
     icon: "bar_chart",
     link: "#",
-    handleAction: () => {},
   },
 ];
 const leftDrawerOpen = ref(false);
