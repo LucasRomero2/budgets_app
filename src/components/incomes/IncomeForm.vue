@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-useless-template-attributes -->
 <template>
   <q-form id="incomeForm" @submit="onSubmit">
-    <div class="row q-col-gutter-md">
+    <div class="row q-col-gutter-sm q-mt-sm">
       <!-------- Monto -------->
       <div class="col-5">
         <q-currency-input color="positive" v-model="amount" />
@@ -23,7 +23,7 @@
         />
       </div>
       <!-------- Categoria -------->
-      <div class="col-12">
+      <div class="col-12 col-sm-6">
         <select-category
           v-model="category_id"
           color="positive"
@@ -31,7 +31,7 @@
         />
       </div>
       <!-------- Cuenta -------->
-      <div class="col-12">
+      <div class="col-12 col-sm-6">
         <select-account
           v-model="account_id"
           color="positive"
@@ -67,11 +67,11 @@ const formRules = {
 
 const onSubmit = () => {
   emit("submitForm", {
-    amount,
-    date,
-    description,
-    category_id,
-    account_id,
+    amount: amount.value,
+    date: date.value,
+    description: description.value,
+    category_id: category_id.value,
+    account_id: account_id.value,
   });
 };
 </script>

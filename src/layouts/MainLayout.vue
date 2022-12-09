@@ -50,7 +50,7 @@
 
     <!-- Dialogs Forms -->
     <q-dialog v-model="showIncomeCreate">
-      <income-create />
+      <income-create @close-income-dialog="showIncomeCreate = false" />
     </q-dialog>
 
     <q-page-container>
