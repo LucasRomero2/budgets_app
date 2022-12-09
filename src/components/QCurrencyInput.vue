@@ -5,6 +5,7 @@
     v-model="formattedValue"
     outlined
     :label="label"
+    :rules="[(val) => !!val || 'Monto es requerido']"
   />
 </template>
 

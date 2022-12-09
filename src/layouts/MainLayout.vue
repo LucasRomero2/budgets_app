@@ -69,10 +69,10 @@ import { useRouter } from "vue-router";
 import { useCategoryStore } from "stores/category-store";
 import { useAccountStore } from "src/stores/account-store";
 
-/* pass to function? */
+/* TODO: pass to function? */
 const categoryStore = useCategoryStore();
 const accountStore = useAccountStore();
-/* Set loading for now show components */
+/* TODO: Set loading for now show components */
 categoryStore.setCategories();
 accountStore.setAccounts();
 

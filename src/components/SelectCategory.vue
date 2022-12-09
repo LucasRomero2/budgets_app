@@ -4,7 +4,7 @@
     :model-value="modelValue"
     @update:model-value="(newVal) => emit('update:modelValue', newVal)"
     :options="incomeCategories"
-    label="Categoria"
+    label="Categoría"
     :color="color"
     map-options
     emit-value
